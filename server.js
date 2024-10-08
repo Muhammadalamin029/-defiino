@@ -11,7 +11,7 @@ const session = require("express-session");
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static("public"));
 app.use(
   session({
@@ -149,12 +149,10 @@ app.post("/logout", (req, res) => {
     req.session.destroy((err) => {
       if (err) {
         console.error("Error destroying session:", err);
-        return res
-          .status(500)
-          .json({
-            success: false,
-            message: "There is a problem with the exit",
-          });
+        return res.status(500).json({
+          success: false,
+          message: "There is a problem with the exit",
+        });
       }
       res.json({ success: true });
     });
@@ -187,12 +185,10 @@ app.post("/addCoins", (req, res) => {
   }
 
   if (usersReceivedCoins[action].includes(username)) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "You have already received coins for this action",
-      });
+    return res.status(400).json({
+      success: false,
+      message: "You have already received coins for this action",
+    });
   }
 
   userData[username].coins += coins;
