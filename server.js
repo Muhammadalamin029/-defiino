@@ -11,7 +11,7 @@ const session = require("express-session");
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(
   session({
